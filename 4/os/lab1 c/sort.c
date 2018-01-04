@@ -8,7 +8,7 @@ void bubble(int *a,int n){
 				swap(a[j],a[j+1]);
 	}}}
 }
-//select min element and swap
+// select min element and swap
 void selection(int *a,int n){
 	int min;
 	for(int i=0;i<n-1;i++){min=i;
