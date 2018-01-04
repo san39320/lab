@@ -1,0 +1,53 @@
+This is a MIME-encapsulated message.
+
+--CD2882E3789.1478341661/itadminMS-desktop.nitk.ac.in
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+This is the mail system at host itadminMS-desktop.nitk.ac.in.
+
+I'm sorry to have to inform you that your message could not
+be delivered to one or more recipients. It's attached below.
+
+For further assistance, please send mail to postmaster.
+
+If you do so, please include this problem report. You can
+delete your own text from the attached returned message.
+
+                   The mail system
+
+<piyush14041995sarthi@gmail.com>: unknown user: "piyush14041995sarthi"
+
+--CD2882E3789.1478341661/itadminMS-desktop.nitk.ac.in
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; itadminMS-desktop.nitk.ac.in
+X-Postfix-Queue-ID: CD2882E3789
+X-Postfix-Sender: rfc822; student@itadminMS-desktop
+Arrival-Date: Sat,  5 Nov 2016 15:57:41 +0530 (IST)
+
+Final-Recipient: rfc822; piyush14041995sarthi@gmail.com
+Original-Recipient: rfc822;piyush14041995sarthi@gmail.com
+Action: failed
+Status: 5.1.1
+Diagnostic-Code: X-Postfix; unknown user: "piyush14041995sarthi"
+
+--CD2882E3789.1478341661/itadminMS-desktop.nitk.ac.in
+Content-Description: Undelivered Message
+Content-Type: message/rfc822
+
+Return-Path: <student@itadminMS-desktop>
+Received: by itadminMS-desktop.nitk.ac.in (Postfix, from userid 1001)
+	id CD2882E3789; Sat,  5 Nov 2016 15:57:41 +0530 (IST)
+Subject: Hello World
+To: <piyush14041995sarthi@gmail.com>
+Cc: <piyush14041995sarthi@gmail.com>
+X-Mailer: mail (GNU Mailutils 2.99.99)
+Message-Id: <20161105102741.CD2882E3789@itadminMS-desktop.nitk.ac.in>
+Date: Sat,  5 Nov 2016 15:57:41 +0530 (IST)
+From: student@itadminMS-desktop
+
+hello
+
+--CD2882E3789.1478341661/itadminMS-desktop.nitk.ac.in--
