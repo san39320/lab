@@ -10,17 +10,15 @@ void bubble(int *a,int n){
 }
 void selection(int *a,int n){
 	int min;
-	for(int i=0;i<n-1;i++){
+	for(int i=0;i<n-1;i++){min=i;
 		for(int j=i+1;j<n;j++){
-			min=i;
 			if(a[min]>a[j]){min=j;}
 		}
 		swap(a[i],a[min]);
-	}
-}
+}}
 //merege sort
 void merge(int* a,int l,int m,int r){
-	int n1=l-m+1,n2=r-m,i,j,k;
+	int n1=m-l+1,n2=r-m,i,j,k;
 	int L[n1],R[n2];
 	for(int i=0;i<n1;i++)L[i]=a[l+i];
 	for(int i=0;i<n2;i++)R[i]=a[m+1+i];
@@ -41,7 +39,6 @@ void mergesort(int* a,int l,int r){
 	mergesort(a,m+1,r);
 	merge(a,l,m,r);}
 }
-
 void main(){
 		int n=5;
 		int a[5]={5,4,3,2,1};
