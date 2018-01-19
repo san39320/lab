@@ -4,6 +4,7 @@ public class node{
 	public int pageno;
 	public node next;
 	public String name;
+	public int addr;
 	public node(int processno){
 	this.processno=processno;
 	this.pageno=pageno;

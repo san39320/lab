@@ -3,7 +3,6 @@ import java.util.*;
 import node1.node;
 public class main {
     static Scanner input=new Scanner(System.in);
-    //static int[] meamory=new int[10];
     static ArrayList<node> process=new ArrayList<node>(15);
     static void display(){
         for(int i=0;i<process.size();i++){
@@ -15,13 +14,26 @@ public class main {
         }
     }
     static void delete1(String p)
-    {
+    {   int temp=-1;
         for(int i=0;i<process.size();i++)
         {
             if(process.get(i)!=null && process.get(i).name.equals(p))
             {
-                process.set(i,null);
+                temp=i;
+                break;
             }
+        }
+        if(temp==-1)
+        {
+            System.out.println("No process found");
+            return;
+        }
+        node pointer = process.get(temp);
+        while(pointer!=null)
+        {
+            int index=pointer.addr;
+            process.set(index,null);
+            pointer=pointer.next;
         }
     }
     static void allocate(int processsize,String name)
@@ -38,6 +50,7 @@ public class main {
                         process.set(k,new node(-1));
                         process.get(k).pageno=j;
                         process.get(k).name=name;
+                        process.get(k).addr=k;
                         tail.next=process.get(k);
                         tail=process.get(k);break;
                     }
