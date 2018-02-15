@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #define fr(a,n) for(int i=a;i<n;i++)
-struct node{
+struct node{    //structure which stores the information of the block
 	int starting_index;
 	int ending_index;
 	int occupied_index;
@@ -9,7 +9,7 @@ struct node{
 	struct fixednode *next;
 	int status;
 };
-void initializeblock(struct node block[],int *a,int size[],int n){
+void initializeblock(struct node block[],int *a,int size[],int n){//initiales the blocksize based on the size of process
 	for(int i=1;i<n;i++){
 		size[i]=size[i-1]+size[i];
 	}
@@ -23,7 +23,7 @@ void initializeblock(struct node block[],int *a,int size[],int n){
 	block[i].status=0;
 	}
 }
-int freemeamory(struct node block){
+int freemeamory(struct node block){//calculates amount of free meamory
 	int free;
 	if(block.occupied_index==-1){
 	free=block.ending_index-block.starting_index+1;
@@ -32,13 +32,13 @@ int freemeamory(struct node block){
 	}
 	return (free);
 }
-void analyze(struct node meamory[],int n){
+void analyze(struct node meamory[],int n){//displays the amount of free meamory,size and proccess occupied.
 	for(int i=0;i<n;i++){
 		int total=(meamory[i].ending_index-meamory[i].starting_index+1);
 		int free=freemeamory(meamory[i]);
 		printf("block %d process_id:%d :total:%d bytes occupied:%d free:%d\n",i,meamory[i].process_id,total,total-free,free);}
 }
-void firstfit(struct node block[],int *process,int *a,int n,int nop,int id){
+void firstfit(struct node block[],int *process,int *a,int n,int nop,int id){//finds the first block the fits the process
 	for(int i=0;i<nop;i++){
 		for(int j=0;j<n;j++){
 			if(process[i]<=freemeamory(block[j])&&(block[j].status==0)){
@@ -52,7 +52,7 @@ void firstfit(struct node block[],int *process,int *a,int n,int nop,int id){
 		}
 	}analyze(block,n);
 }	
-void bestfit(struct node block[],int *process,int *a,int n,int nop,int id){
+void bestfit(struct node block[],int *process,int *a,int n,int nop,int id){//finds the best block the fits the process
 	for(int i=0;i<nop;i++){
 		int min=-1;
 		for(int j=0;j<n;j++){
@@ -70,7 +70,7 @@ void bestfit(struct node block[],int *process,int *a,int n,int nop,int id){
 		printf("meamory insufficient for proccess of %dbytes \n",process[i]);}
 	}analyze(block,n);
 }
-void worstfit(struct node block[],int *process,int *a,int n,int nop,int id){
+void worstfit(struct node block[],int *process,int *a,int n,int nop,int id){//finds the worst block the fits the process
 	for(int i=0;i<nop;i++){
 		int max=-1;
 		for(int j=0;j<n;j++){
@@ -89,7 +89,7 @@ void worstfit(struct node block[],int *process,int *a,int n,int nop,int id){
 		}
 	}analyze(block,n);
 }
-void deleteprocess(struct node block[],int n,int id){
+void deleteprocess(struct node block[],int n,int id){//deletes the process from memory
 	for(int i=0;i<n;i++){
 		if(block[i].process_id==id){
 			block[i].occupied_index=-1;
@@ -124,12 +124,12 @@ int main(){
 		int choice1;
 		scanf("%d",&choice1);
 		switch(choice1){
-			case 1:printf("enter process id\n");
+			case 1:printf("enter process id\n");//input a process
 				int id;
 				scanf("%d",&id);
 				deleteprocess(meamory,noofblocks,id);
 				break;
-			case 2:
+			case 2://deleting a process
 				printf("enter the new process size and id\n");
 				int newpr[1];
 				scanf("%d",&newpr[0]);

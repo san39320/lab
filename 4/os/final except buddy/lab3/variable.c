@@ -1,14 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
 #define fr(a,n) for(int i=a;i<n;i++)
-struct node{
+struct node{              //structure which stores the information of the block
 	int starting_index;
 	int ending_index;
 	int occupied_index;
 	int process_id;
 	struct fixednode *next;
 };
-void initializeblock(struct node block[],int *a,int size[],int n){
+void initializeblock(struct node block[],int *a,int size[],int n){//initiales the blocksize based on the size of process
 	for(int i=1;i<n;i++){
 		size[i]=size[i-1]+size[i];
 	}
@@ -28,7 +28,7 @@ void initializeblock(struct node block[],int *a,int size[],int n){
 	block[i].process_id=-1;
 	}
 }
-int freemeamory(struct node block){
+int freemeamory(struct node block){//calculates amount of free meamory
 	int free;
 	if(block.occupied_index==-1){
 	free=block.ending_index-block.starting_index+1;
@@ -39,7 +39,7 @@ int freemeamory(struct node block){
 	}
 	return (free);
 }
-void analyze(struct node meamory[],int n){
+void analyze(struct node meamory[],int n){//displays the amount of free meamory,size and proccess occupied.
 	for(int i=0;i<n;i++){
 		int total;
 		if(meamory[i].starting_index==meamory[i].ending_index)
@@ -48,9 +48,9 @@ void analyze(struct node meamory[],int n){
 			total=(meamory[i].occupied_index==-2?0:(meamory[i].ending_index-meamory[i].starting_index+1));
 		int free=freemeamory(meamory[i]);
 		printf("block %d process_id:%d :total:%d bytes occupied:%d free:%d\n",i,meamory[i].process_id,total,total-free,free);
-		//printf(" start adress:%d occcupied adress:%d end address:%d \n",meamory[i].starting_index,meamory[i].occupied_index,meamory[i].ending_index);}
+
 }}
-void firstfit(struct node block[],int *process,int *a,int n,int nop,int id){
+void firstfit(struct node block[],int *process,int *a,int n,int nop,int id){//finds the first block the fits the process
 	for(int i=0;i<nop;i++){
 		for(int j=0;j<n;j++){
 			if(process[i]<=freemeamory(block[j])){
@@ -66,7 +66,7 @@ void firstfit(struct node block[],int *process,int *a,int n,int nop,int id){
 		}
 	}analyze(block,n);
 }	
-void bestfit(struct node block[],int *process,int *a,int n,int nop,int id){
+void bestfit(struct node block[],int *process,int *a,int n,int nop,int id){//finds the best block the fits the process
 	for(int i=0;i<nop;i++){
 		int min=-1;
 		for(int j=0;j<n;j++){
@@ -87,7 +87,7 @@ void bestfit(struct node block[],int *process,int *a,int n,int nop,int id){
 		printf("meamory insufficient for proccess of %dbytes \n",process[i]);}
 	}analyze(block,n);
 }
-void worstfit(struct node block[],int *process,int *a,int n,int nop,int id){
+void worstfit(struct node block[],int *process,int *a,int n,int nop,int id){//finds the worst block the fits the process
 	for(int i=0;i<nop;i++){
 		int max=-1;
 		for(int j=0;j<n;j++){
@@ -109,7 +109,7 @@ void worstfit(struct node block[],int *process,int *a,int n,int nop,int id){
 		}
 	}analyze(block,n);
 }
-int deleteprocess(struct node block[],int n,int id){
+int deleteprocess(struct node block[],int n,int id){//deletes the process from memory
 	for(int i=0;i<n;i++){
 		if(block[i].process_id==id){
 			block[i].occupied_index=-1;
@@ -119,11 +119,11 @@ int deleteprocess(struct node block[],int n,int id){
 	}
 	return -1;
 }
-int defragment(struct node block[],int n,int i,int noofblocks){
+int defragment(struct node block[],int n,int i,int noofblocks){//does the swaping of process and collction the fragments at the end
 	if(i>=0){
 		printf("defragmenting\n%d",noofblocks);
 		for(int j=i;j<noofblocks-1;j++){
-			if(block[j].occupied_index!=block[j].ending_index){
+			if(block[j].occupied_index!=block[j].ending_index){//decreses the size of blocks by removing internal fragmentation
 				int temp;
 				temp=block[j].ending_index-(block[j].occupied_index!=-1?block[j].occupied_index:block[i].starting_index);
 				if(block[j].occupied_index==-1){
@@ -139,11 +139,11 @@ int defragment(struct node block[],int n,int i,int noofblocks){
 		}
 	}
 }
-void cleanblock(struct node block[],int blockno){
+void cleanblock(struct node block[],int blockno){//compacts the block to block of size zero
 	block[blockno].occupied_index=-1;
 	block[blockno].process_id=-1;
 }
-void mergeblock(struct node block[],int n){
+void mergeblock(struct node block[],int n){//merges two blocks which are free
 	for(int i=0;i<n-1;i++){
 		if(block[i].occupied_index==-1&&block[i+1].occupied_index==-1){
 			block[i].ending_index=block[i+1].ending_index;
@@ -170,20 +170,12 @@ int main(){
 	analyze(meamory,noofblocks+1);printf("\n");
 	firstfit(meamory,blocks,a,noofblocks,noofblocks,0);
 	noofblocks=noofblocks+1;
-	/*printf("\nenter the fit you want to try \n1.first fit\n2.best fit\n3.worst fit\n");
-	int choice;scanf("%d",&choice);
-	switch(choice){
-		case 1:firstfit(meamory,process,a,noofblocks,noofprocess,0);break;
-		case 2:bestfit(meamory,process,a,noofblocks,noofprocess,0);break;
-		case 3:worstfit(meamory,process,a,noofblocks,noofprocess,0);break;
-		default:printf("wrong input");
-	}*/
 	while(1){
 		printf("enter choice \n 1.delete process 2.enter new process 3.clean a block");
 		int choice1;
 		scanf("%d",&choice1);
 		switch(choice1){
-			case 1:printf("enter process id\n");
+			case 1:printf("enter process id\n"); //input a process 
 				int id,i;
 				scanf("%d",&id);
 				i=deleteprocess(meamory,noofblocks,id);
@@ -192,7 +184,7 @@ int main(){
 				defragment(meamory,noofblocks,i,noofblocks);
 				analyze(meamory,noofblocks);
 				break;
-			case 2:
+			case 2:				//inserting new process
 				printf("enter the new process size and id\n");
 				int newpr[1];
 				scanf("%d",&newpr[0]);
@@ -204,7 +196,7 @@ int main(){
 				else if(choice==2)bestfit(meamory,newpr,a,noofblocks,1,id);
 				else if(choice==3)worstfit(meamory,newpr,a,noofblocks,1,id);
 				break;
-			case 3:printf("enter the block no u want to clean");
+			case 3:printf("enter the block no u want to clean"); //deleting a process
 				int blockno;
 				scanf("%d",&blockno);
 				cleanblock(meamory,blockno);
