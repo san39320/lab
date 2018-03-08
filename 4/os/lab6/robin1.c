@@ -4,68 +4,56 @@
 int n;
 int front =  - 1;
 int rear =  - 1;
-void insertq(int queue[], int item)
+//circular queue operation
+void insertq(int *arr,int value)
 {
-    if ((front == 0 && rear == n - 1) || (front == rear + 1))
+    if ((front == 0 && rear == n-1) ||
+        (rear == front-1))
     {
-        printf("queue is full");
+        printf("\nQueue is Full");
         return;
     }
-    else if (rear ==  - 1)
+
+    else if (front == -1) /* Insert First Element */
     {
-        rear++;
-        front++;
+        front = rear = 0;
+        arr[rear] = value;
     }
-    else if (rear == n - 1 && front > 0)
+
+    else if (rear == n-1 && front != 0)
     {
         rear = 0;
+        arr[rear] = value;
     }
+
     else
     {
         rear++;
-    }
-    queue[rear] = item;
-}
-
-void display(int queue[])
-{
-    int i;
-    printf("\n");
-    if (front > rear)
-    {
-        for (i = front; i < n; i++)
-        {
-            printf("%d ", queue[i]);
-        }
-        for (i = 0; i <= rear; i++)
-            printf("%d ", queue[i]);
-    }
-    else
-    {
-        for (i = front; i <= rear; i++)
-            printf("%d ", queue[i]);
+        arr[rear] = value;
     }
 }
 
-void deleteq(int queue[])
+// Function to delete element from Circular Queue
+void deleteq(int* arr)
 {
-    if (front ==  - 1)
+    if (front == -1)
     {
-        printf("Queue is empty ");
+        printf("\nQueue is Empty");
     }
-    else if (front == rear)
+
+    int data = arr[front];
+    arr[front] = -1;
+    if (front == rear)
     {
-        printf("\n %d deleted", queue[front]);
-        front =  - 1;
-        rear =  - 1;
+        front = -1;
+        rear = -1;
     }
+    else if (front == n-1)
+        front = 0;
     else
-    {
-        printf("\n %d deleted", queue[front]);
         front++;
-    }
+    
 }
-
 //circular queue
 
 
@@ -89,48 +77,44 @@ void main(){
 	int time=at[0];
 	int arrivalcounter=0;
 	int circular[n];insertq(circular,0);
-	while(burst>0){
-		if(front!=-1){
-			int i=circular[front];
+	while(burst>0) {
+        if (front != -1) {
+            int i = circular[front];
 
-			if(bt[i]>=q){
-			burst=burst-q;
-			time=time+q;
-			bt[i]=bt[i]-q;
-			deleteq(circular);
-				if(bt[i]==0){
-				ct[i]=time;
-				}else{
-				insertq(circular,i);
-				}
-			}
-			else if(bt[i]>0 && bt[i]<q){
-			deleteq(circular);
-			burst=burst-bt[i];
-			time=time+bt[i];
-			bt[i]=0;
-			ct[i]=time;
-			}
-			printf("time:%d\n",time);
-		}else if(front==-1){
-			if(arrivalcounter<n){
-				arrivalcounter++;
-				time=at[arrivalcounter+1];
-			}
-		}
-		//adding arrieved process to queue
-		for(int i=arrivalcounter+1;i<n;i++){
-			if(at[arrivalcounter]>time && front==-1){
-				arrivalcounter++;
-				insertq(circular,arrivalcounter);
-			}
-			else if(at[arrivalcounter]>time){break;}
-			else if(at[arrivalcounter]<time){				
-				arrivalcounter++;
-				insertq(circular,arrivalcounter);}
-		}
+            if (bt[i] >= q) {
+                burst = burst - q;
+                time = time + q;
+                bt[i] = bt[i] - q;
+                deleteq(circular);
+                if (bt[i] == 0) {
+                    ct[i] = time;
+                } else {
+                    insertq(circular, i);
+                }
+            } else if (bt[i] > 0 && bt[i] < q) {
+                deleteq(circular);
+                burst = burst - bt[i];
+                time = time + bt[i];
+                bt[i] = 0;
+                ct[i] = time;
+            }
+            printf("time:%d\n", time);
+        }
 
-	}
+        //adding arrieved process to queue
+        for (int i = arrivalcounter + 1; i < n; i++) {
+            if (at[i] > time && front == -1) {
+                arrivalcounter++;
+                time = at[arrivalcounter + 1];
+                insertq(circular, arrivalcounter);
+            } else if (at[i] > time) { break; }
+            else if (at[i] <= time) {
+                arrivalcounter++;
+                insertq(circular, arrivalcounter);
+            }
+        }
+    }
+
 	for(int i=0;i<n;i++){
 		printf("process %d %d \n",i,ct[i]);
 	}
