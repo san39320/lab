@@ -12,6 +12,9 @@ int counter(int* a,int l,int r,int element){
 	return count;
 }
 int majority(int* a,int l,int r){
+	if(l==r){
+	return a[l];
+	}else
 	if((l-r)==1){
 		if(a[l]==a[r]){
 		return a[l];
