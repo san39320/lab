@@ -5,7 +5,8 @@ int main(){
     int** graph=(int **)malloc(7*sizeof(int *));
     int** prev=(int **)malloc(7*sizeof(int *));
     int** next=(int **)malloc(7*sizeof(int *));
-    for(int i=0;i<7;i++){
+    int** temp;
+    for(int i=0;i<7;i++){ 
         graph[i]=(int *) malloc(7*sizeof(int));
         prev[i]=(int *) malloc(7*sizeof(int));
         next[i]=(int *) malloc(7*sizeof(int));
@@ -29,7 +30,9 @@ int main(){
             for(int j=1;j<=n;j++){
                 next[i][j]=min(prev[i][j],prev[i][k]+prev[k][j]);
             }
+            temp=prev;
             prev=next;
+            next=temp;
         }
     }
     cout<<"graph is\n";
