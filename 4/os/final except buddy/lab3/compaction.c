@@ -23,18 +23,10 @@ void insert(struct Node* head,int id,int memory){
         temp=head->next;
         head->next=node;
         node->next=temp;
-        //memory and start end
-        head->memory=head->memory-memory;
-        
+        head->memory=head->memory-memory;//splitting memory
+        node->end=head->end;
         head->end=head->end-memory;
-        int prev=head->end;
-
-        while(node!=NULL){
-            node->start=prev+1;
-            node->end=prev+1+node->memory;
-            prev=node->end;
-            node=node->next;
-        }
+        node->start=head->end+1;
     }else{
         printf("memory full");
     }
@@ -46,7 +38,7 @@ void display(struct Node* head){
         if(node->flag==1)
         printf("process id :%d start:%d end:%d memory:%d\n",node->id,node->start,node->end,node->memory);
         else
-        printf("process id :%d start:%d end:%d free memory:%d\n",node->id,node->start,node->end,node->memory);
+        printf("process id :%d start:%d end:%d free memory:%d\n",-1,node->start,node->end,node->memory);
         node=node->next;
     }
 }
@@ -55,7 +47,7 @@ void delete(struct Node * head,int id){
     while(node!=NULL){
         if(node->id==id){
             node->flag=0;
-            printf("ddcdc");
+            break;
         }
         node=node->next;
     }
@@ -88,14 +80,14 @@ void main(){
     int memory=2000;
     struct Node head;
     head.memory=memory;
-    head.start=0;
+    head.start=1;
     head.end=memory;
     head.next=NULL;head.flag=0;
     insert(&head,1,300);
     insert(&head,2,250);
-    // display(&head);
+    display(&head);
     delete(&head,1);
     // display(&head);
     compact(&head);
-    display(&head);
+    //display(&head);
 }

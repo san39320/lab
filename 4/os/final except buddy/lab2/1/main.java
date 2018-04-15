@@ -9,7 +9,7 @@ public class main {
             if(process.get(i)!=null){
             System.out.println("|meamory:"+i+" processid:"+process.get(i).name+" pageno:"+process.get(i).pageno+"|");
         }else{
-                System.out.println("|meamory:"+i+"|");
+                System.out.println("|meamory:"+i+"|");      
             }
         }
     }
@@ -38,16 +38,15 @@ public class main {
     }
     static void allocate(int processsize,String name)//allocating memory for a process
     {
-            int noofpages=processsize/50;     //calculte the number of pages
-            node head=new node(-1);
-            node tail = head;
+           sss int noofpages=proceize/50;     //calculte the number of pages
+            node tail = new node;//starting 
 
             for(int j=0;j<noofpages;j++){     //allocation process pages in frames and linking the nodes
                 int flag=0;
                 for(int k=0;k<10;k++){
                     if(process.get(k)==null){
                         flag=1;
-                        process.set(k,new node(-1));
+                        process.set(k,new node());
                         process.get(k).pageno=j;
                         process.get(k).name=name;
                         process.get(k).addr=k;

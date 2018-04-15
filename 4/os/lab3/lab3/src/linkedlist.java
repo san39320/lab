@@ -1,3 +1,0 @@
-class linkedlist{
-	int head;
-}

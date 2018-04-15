@@ -26,9 +26,7 @@ public class main {
     static void allocate(int processsize,String name)//make an entry in page table and insert the process pages in frames
     {
         int noofpages=processsize/50;
-        node head=new node(-1);
-        node tail = head;
-        ArrayList<Integer> temp=new ArrayList<Integer>(processsize);
+        ArrayList<Integer> temp=new ArrayList<Integer>(noofpages);
         for(int j=0;j<noofpages;j++){
             int flag=0;
             for(int k=0;k<10;k++){

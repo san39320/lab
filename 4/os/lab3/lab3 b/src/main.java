@@ -40,8 +40,10 @@ public class main {
         node tail = head;
         ArrayList<Integer> temp=new ArrayList<Integer>(processsize);
         for(int j=0;j<noofpages;j++){
+            int flag=0;
             for(int k=0;k<10;k++){
                 if(process.get(k)==null){
+                    flag=1;
                     process.set(k,new node(-1));
                     process.get(k).pageno=j;
                     process.get(k).name=name;
@@ -50,6 +52,9 @@ public class main {
 //                    tail=process.get(k);
                     break;
                 }
+            }
+            if(flag==0){
+                System.out.println("insufficient meamory for some or all pages");break;
             }
         }
         table.put(name,temp);
@@ -63,14 +68,42 @@ public class main {
             allocate(processsize[i],Integer.toString(i));
         }
         display();
-        delete1("2");
+        /*delete1("2");
         delete1("0");
         System.out.println("--------------------------------------------------");
         display();
         allocate(300,"google");
         System.out.println("--------------------------------------------------");
         display();
-        System.out.println(table);
+        System.out.println(table);*/
+        while(true){
+            System.out.println("enter 1.insertion 2.deletion 3.display meamory 4.display process table 5.exit");
+            int choice=input.nextInt();
+            if(choice==1){
+                System.out.println("enter the size of process");
+                int mea=input.nextInt();
+                System.out.println("enter the process name");
+                String a;
+                a=input.nextLine();
+                a=input.nextLine();
+                allocate(mea,a);
+            }else if(choice==2){
+                String a;
+                System.out.println("enter the name of process");
+                a=input.nextLine();
+                a=input.nextLine();
+                delete1(a);
+            }else if(choice==3){
+                display();
+            }else if(choice==4){
+                System.out.println(table);
+            }else if(choice==5){
+                break;
+            }
+            else{
+                System.out.println("wrong input");
+            }
+        }
     }
 
 }

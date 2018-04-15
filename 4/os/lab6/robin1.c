@@ -105,7 +105,7 @@ void main(){
         for (int i = arrivalcounter + 1; i < n; i++) {
             if (at[i] > time && front == -1) {
                 arrivalcounter++;
-                time = at[arrivalcounter + 1];
+                time = at[arrivalcounter];
                 insertq(circular, arrivalcounter);
             } else if (at[i] > time) { break; }
             else if (at[i] <= time) {

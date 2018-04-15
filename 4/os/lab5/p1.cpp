@@ -20,7 +20,10 @@ void initialize(){
 	size=(pow(2,levels)-1);
 	memset(mem,-1,size*4);
 }
-void allocate(int process){}
+void allocate(int process){
+	int noofblocksreq=process/blocksize;
+	int level=16/
+}
 int main(){
 	initialize();
 	int process[5]={63,64,128,32,200}
