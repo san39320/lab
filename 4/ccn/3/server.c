@@ -33,7 +33,7 @@ void main(){
         FILE *fp;
         fp=fopen(filename,"r");
         while(fgets(buffer,80,fp)!=NULL){
-            write(connfd,buffer,80);
+            write(connfd,buffer,80);                                                                                       
         }
         //close
         fclose(fp);

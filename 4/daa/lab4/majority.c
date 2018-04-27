@@ -33,9 +33,10 @@ int majority(int* a,int l,int r){
 		}else if(right != -1){
 			countright=counter(a,l,r,right);
 		}
-		if(countleft>m)
+		int len=((r-l)+1)/2;
+		if(countleft>len)
 			{return left;}
-		else if(countright>m)
+		else if(countright>len)
 			{return right;}
 		return -1;
 	}
