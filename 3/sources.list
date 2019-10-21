@@ -17,7 +17,7 @@ deb http://in.archive.ubuntu.com/ubuntu/ xenial-updates main restricted
 ## team.
 deb http://in.archive.ubuntu.com/ubuntu/ xenial universe
 # deb-src http://in.archive.ubuntu.com/ubuntu/ xenial universe
-deb http://in.archive.ubuntu.com/ubuntu/ xenial-updates universe
+#deb http://in.archive.ubuntu.com/ubuntu/ xenial-updates universe
 # deb-src http://in.archive.ubuntu.com/ubuntu/ xenial-updates universe
 
 ## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu 
